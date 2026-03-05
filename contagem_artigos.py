@@ -13,6 +13,7 @@ HEADERS = {
     "User-Agent": "Arcstur Scripts (https://meta.wikimedia.org/wiki/User:Arcstur)",
 }
 
+# TODO: obter essa lista automaticamente
 # obtido de <https://incubator.wikimedia.org/wiki/Special:PrefixIndex?prefix=Wp%2Fkgp%2F&namespace=0&hideredirects=1>
 titles = [
     "Wp/kgp/'Ó To Vẽme",
