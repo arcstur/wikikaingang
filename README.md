@@ -1,0 +1,2 @@
+# wikikaingang
+Wikikaingáng scripts
