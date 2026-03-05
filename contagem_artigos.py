@@ -1,5 +1,6 @@
 from datetime import datetime
 from datetime import date
+import csv
 
 import requests
 import pandas as pd
@@ -81,6 +82,7 @@ titles = [
     "Wp/kgp/Kãj",
     "Wp/kgp/Kãme kar Pénĩ",
     "Wp/kgp/Kó'y Vãme",
+    "Wp/kgp/Kóhon",
     "Wp/kgp/Main Page",
     "Wp/kgp/Momro",
     "Wp/kgp/Mĩg Vãme",
@@ -143,15 +145,18 @@ titles = [
 
 
 def main():
-    timestamps = []
+    title_to_revision = {}
     for title in titles:
         print(f"{title}...")
         first = get_first_revision(title)
-        timestamps.append(first["timestamp"])
-
+        title_to_revision[title] = first
+    timestamps = [r["timestamp"] for r in title_to_revision.values()]
     counts = count_items_per_month(timestamps)
     print(counts)
     plot_item_counts(counts)
+
+    with open("artigos.csv", "w") as f:
+        export_articles(title_to_revision, f)
 
 
 def get_first_revision(title):
@@ -200,6 +205,27 @@ def plot_item_counts(item_counts):
     plt.savefig("artigos.png", dpi=300, bbox_inches="tight")
 
 
+def export_articles(title_to_revision, csvfile):
+    print("Exporting csv...")
+    writer = csv.writer(csvfile)
+    writer.writerow(
+        [
+            "artigo",
+            "link",
+            "usuário",
+            "data",
+        ]
+    )
+    for title, revision in title_to_revision.items():
+        writer.writerow(
+            [
+                title,
+                "https://incubator.wikimedia.org/wiki/" + urllib.parse.quote(title),
+                revision["user"]["name"],
+                revision["timestamp"],
+            ]
+        )
+
+
 if __name__ == "__main__":
     main()
-
