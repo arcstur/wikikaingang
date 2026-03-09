@@ -103,7 +103,7 @@ def plot_item_counts(item_counts):
 
 def export_articles(title_to_revision, csvfile):
     print("Exporting csv...")
-    writer = csv.writer(csvfile)
+    writer = csv.writer(csvfile, delimiter="\t")
     writer.writerow(
         [
             "artigo",
