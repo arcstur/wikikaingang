@@ -26,6 +26,8 @@ def main():
     titles = get_titles()
     title_to_revision = {}
     for title in titles:
+        if title == "Wp/kgp/Main Page":
+            continue
         print(f"{title}...")
         first = get_first_revision(title)
         title_to_revision[title] = first

@@ -26,7 +26,7 @@ def main():
         print()
         for title in titles_without_cat:
             escaped_title = urllib.parse.quote(title, safe="")
-            print("*", title, f"https://incubator.wikimedia.org/wiki/{escaped_title}")
+            print(f"https://incubator.wikimedia.org/wiki/{escaped_title}")
     else:
         print("YAY! All mainspace articles have the control category.")
 
